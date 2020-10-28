@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="card-list">
+        <ng-container *ngIf="eventList">
+            <ng-container *ngFor="let event of eventList">
+                <app-card *ngIf="event.isActive" [event]="event"></app-card>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!eventList">
+            <h1>Loading...</h1>
+        </ng-container>
+    </div>
+</div>
