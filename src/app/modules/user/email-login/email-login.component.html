@@ -1,27 +1,54 @@
 <mat-card class="mat-elevation-z2">
     <div *ngIf="isSignup">
-        <h3>Create Account</h3>
+        <h1>Create Account</h1>
     </div>
 
     <div *ngIf="isLogin">
-        <h3>Sign In</h3>
-        <button size="small" mat-stroked-button (click)="changeType('signup')">
-            New user?
-        </button>
+        <h1>Sign In</h1>
     </div>
 
     <div *ngIf="isPasswordReset">
-        <h3>Reset Password</h3>
-        <button size="small" mat-button (click)="changeType('login')">Back</button>
+        <button size="small" mat-button (click)="changeType('login')">
+            < Back</button>
+                <h1>Reset Password</h1>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="col-2">
+            <mat-form-field [color]="firstName.valid && 'accent'" style="width:100%" *ngIf="isSignup"
+                appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" type="text" placeholder="First Name" autocomplete="off" />
+
+                <mat-error *ngIf="firstName.invalid && firstName.dirty">
+                    You must enter a valid First Name
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field [color]="lastName.valid && 'accent'" style="width:100%" *ngIf="isSignup"
+                appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" type="text" placeholder="Last Name" autocomplete="off" />
+
+                <mat-error *ngIf="lastName.invalid && lastName.dirty">
+                    You must enter a valid Last Name
+                </mat-error>
+            </mat-form-field>
+        </div>
+
         <mat-form-field [color]="email.valid && 'accent'" appearance="outline">
             <mat-label>Email Address</mat-label>
             <input matInput formControlName="email" type="email" placeholder="Email" autocomplete="off" />
 
             <mat-error *ngIf="email.invalid && email.dirty">
                 You must enter a valid email address
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field [color]="mobileNumber.valid && 'accent'" *ngIf="isSignup" appearance="outline">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput formControlName="mobileNumber" type="text" placeholder="Mobile Number" autocomplete="off" />
+
+            <mat-error *ngIf="mobileNumber.invalid && mobileNumber.dirty">
+                You must enter a valid Mobile Number
             </mat-error>
         </mat-form-field>
 
@@ -32,7 +59,11 @@
             <mat-error *ngIf="password.invalid && password.dirty">
                 Password must be at least 6 characters long
             </mat-error>
+
         </mat-form-field>
+        <p style="text-align: right;" *ngIf="isLogin">
+            <span style="color: blue; cursor: pointer" (click)="changeType('reset')">Forget Password</span>
+        </p>
 
         <mat-form-field [color]="passwordDoesMatch ? 'accent' : 'warn'" *ngIf="isSignup" appearance="outline">
             <mat-label>Confirm Password</mat-label>
@@ -50,9 +81,14 @@
             Send Reset Email
         </button>
 
-        <button *ngIf="!isPasswordReset" mat-raised-button color="accent" type="submit"
+        <button *ngIf="!isPasswordReset && !isSignup " [disabled]="(password.invalid || email.invalid) || loading"
+            type="submit" mat-flat-button color="primary">
+            Login
+        </button>
+
+        <button *ngIf="!isPasswordReset && !isLogin" mat-flat-button color="primary" type="submit"
             [disabled]="form.invalid || !passwordDoesMatch || loading">
-            Submit
+            Create Account
         </button>
 
         <p style="text-align: center; margin: 1em 0em;" *ngIf="isSignup">
@@ -60,9 +96,14 @@
             <span style="color: blue; cursor: pointer" (click)="changeType('login')">Login</span>
         </p>
 
+        <p style="text-align: center; margin: 1em 0em;" *ngIf="isLogin">
+            Don't have account?
+            <span style="color: blue; cursor: pointer" (click)="changeType('signup')">Signup</span>
+        </p>
+
     </form>
 
-    <button mat-button *ngIf="isLogin && !isPasswordReset" (click)="changeType('reset')">
+    <!-- <button mat-button *ngIf="isLogin && !isPasswordReset" (click)="changeType('reset')">
         Forgot password?
-    </button>
+    </button> -->
 </mat-card>

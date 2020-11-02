@@ -1,7 +1,7 @@
 .login-container {
   height: 100vh;
   display: grid;
-  grid-template-columns: 40% auto;
+  grid-template-columns: 27% auto;
   overflow: hidden;
 }
 
@@ -28,13 +28,54 @@
 }
 
 .right {
-  padding: 7em 0em 0em 3em;
+  padding-top: 5em;
+  overflow-y: scroll;
 }
 
 button img {
   width: 1.25em;
+  margin-right: 1em;
 }
 
-.logout {
-  padding-top: 5em;
+.email-login {
+  margin: 0 auto;
+  min-width: 150px;
+  max-width: 500px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .left .welcome {
+    font-size: 2em;
+    letter-spacing: 1px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .login-container {
+    grid-template-columns: 35% auto;
+  }
+
+  .left .welcome {
+    font-size: 2.8em;
+    letter-spacing: 1px;
+    text-overflow: clip;
+  }
+}
+
+
+@media only screen and (max-width: 678px) {
+  .login-container {
+    grid-template-columns: auto;
+  }
+
+  .left {
+    display: none;
+  }
+
+  .left .welcome {
+    font-size: 2.8em;
+    letter-spacing: 1px;
+    text-overflow: clip;
+  }
 }

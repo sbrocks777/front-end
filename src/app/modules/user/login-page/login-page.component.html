@@ -8,11 +8,13 @@
     </div>
 
     <div class="right">
-        <button mat-raised-button appGoogleSignin>
-            <img src="/assets/google-logo.svg" /> Login with Google
-        </button>
+        <div class="email-login">
+            <button mat-raised-button (click)="authService.googleLogin()">
+                <img src="/assets/google-logo.svg" /> Login with Google
+            </button>
 
-        <h5>OR</h5>
-        <app-email-login></app-email-login>
+            <h5>OR</h5>
+            <app-email-login></app-email-login>
+        </div>
     </div>
 </div>
