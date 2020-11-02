@@ -1,0 +1,40 @@
+.login-container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 40% auto;
+  overflow: hidden;
+}
+
+.dash {
+  height: 10px;
+  width: 75px;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 2em;
+}
+
+.left {
+  padding: 7em 0em 0em 3em;
+  background: blue;
+  color: whitesmoke;
+}
+
+.left .welcome {
+  font-family: "montserrat";
+  font-weight: 900;
+  font-size: 4em;
+  letter-spacing: 2px;
+  line-height: 0.9em;
+}
+
+.right {
+  padding: 7em 0em 0em 3em;
+}
+
+button img {
+  width: 1.25em;
+}
+
+.logout {
+  padding-top: 5em;
+}
