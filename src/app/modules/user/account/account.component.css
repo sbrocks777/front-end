@@ -1,0 +1,31 @@
+mat-card {
+  min-width: 150px;
+  max-width: 500px;
+  margin: 2em 1em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-input-element:disabled,
+.mat-form-field-type-mat-native-select.mat-form-field-disabled
+  .mat-form-field-infix::after {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.back-btn {
+  margin: 2em 0em 1em 0em;
+}
+
+.title {
+  font-family: "montserrat";
+  font-weight: 900;
+  letter-spacing: 1px;
+  font-size: 2em;
+}
+
+label {
+  color: rgba(0, 0, 0, 0.38);
+}

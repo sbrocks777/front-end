@@ -16,7 +16,11 @@ export class EmailLoginComponent implements OnInit {
 
   serverMessage: string;
 
-  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -94,14 +98,14 @@ export class EmailLoginComponent implements OnInit {
     try {
       if (this.isLogin) {
         await this.authService.signIn(email, password).then((result: any) => {
-          if(!result.user.emailVerified) {
+          if (!result.user.emailVerified) {
             this.authService.signOut();
             this.serverMessage = 'Email is not verified';
-            this.authService.sendVerificationMail().then(() =>{
-              alert("Your email is not verified, Please Check Your Inbox!")
-            })
+            this.authService.sendVerificationMail().then(() => {
+              alert('Your email is not verified, Please Check Your Inbox!');
+            });
           } else {
-            this.router.navigate([''])
+            this.router.navigate(['']);
           }
         });
       }

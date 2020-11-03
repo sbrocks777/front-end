@@ -4,13 +4,16 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EmailLoginComponent } from './email-login/email-login.component';
+import { AccountComponent } from './account/account.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
-  { path: '', component: LoginPageComponent, pathMatch: 'full' },
+  { path: 'register', component: LoginPageComponent, pathMatch: 'full' },
+  { path: 'account', component: AccountComponent },
 ];
 
 @NgModule({
-  declarations: [LoginPageComponent, EmailLoginComponent],
+  declarations: [LoginPageComponent, EmailLoginComponent, AccountComponent, ChangePasswordComponent],
   imports: [SharedModule, ReactiveFormsModule, RouterModule.forChild(routes)],
 })
 export class UserModule {}

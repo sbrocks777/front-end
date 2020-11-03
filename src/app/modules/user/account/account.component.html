@@ -1,0 +1,108 @@
+<div class="container">
+    <a routerLink=".." mat-button class="back-btn">
+        < Go Back</a>
+            <h1 class="title">Manage Account</h1>
+
+            <mat-tab-group>
+                <mat-tab label="Basic Details">
+                    <mat-card *ngIf="loading" class="mat-elevation-z2">
+                        <div class="col-2">
+                            <div>
+                                <label>First Name</label>
+                                <app-skeleton-loader Cwidth="100%" Cheight="30px"></app-skeleton-loader>
+                            </div>
+                            <div>
+                                <label>Last Name</label>
+                                <app-skeleton-loader Cwidth="100%" Cheight="30px"></app-skeleton-loader>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Email Address</label>
+                            <app-skeleton-loader Cwidth="100%" Cheight="30px"></app-skeleton-loader>
+                        </div>
+                        <div>
+                            <label>Mobile Number</label>
+                            <app-skeleton-loader Cwidth="100%" Cheight="30px"></app-skeleton-loader>
+                        </div>
+                        <app-skeleton-loader Cwidth="70px" Cheight="30px"></app-skeleton-loader>
+                    </mat-card>
+
+                    <mat-card *ngIf="!loading" class="mat-elevation-z2">
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                            <div class="col-2">
+                                <mat-form-field [color]="firstName.valid && 'accent'" style="width:100%"
+                                    appearance="outline">
+                                    <mat-label>First Name</mat-label>
+                                    <input matInput formControlName="firstName" type="text" placeholder="First Name"
+                                        autocomplete="off" />
+
+                                    <mat-error *ngIf="firstName.invalid && firstName.dirty">
+                                        You must enter a valid First Name
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field [color]="lastName.valid && 'accent'" style="width:100%"
+                                    appearance="outline">
+                                    <mat-label>Last Name</mat-label>
+                                    <input matInput formControlName="lastName" type="text" placeholder="Last Name"
+                                        autocomplete="off" />
+
+                                    <mat-error *ngIf="lastName.invalid && lastName.dirty">
+                                        You must enter a valid Last Name
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <mat-form-field [color]="email.valid && 'accent'" appearance="outline">
+                                <mat-label>Email Address</mat-label>
+                                <input matInput formControlName="email" type="email" placeholder="Email"
+                                    autocomplete="off" />
+
+                                <mat-error *ngIf="email.invalid && email.dirty">
+                                    You must enter a valid email address
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field [color]="mobileNumber.valid && 'accent'" appearance="outline">
+                                <mat-label>Mobile Number</mat-label>
+                                <input matInput formControlName="mobileNumber" type="number" placeholder="Mobile Number"
+                                    autocomplete="off" />
+
+                                <mat-error *ngIf="mobileNumber.invalid && mobileNumber.dirty">
+                                    You must enter a valid Mobile Number
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-error class="server-error">{{ serverMessage }}</mat-error>
+
+                            <div *ngIf="!isDisabled">
+                                <button style="text-align: right;" (click)="enableForm()" mat-flat-button color="danger"
+                                    type="button">
+                                    Cancel
+                                </button>
+                                <button style="text-align: right;" [disabled]="form.invalid" type="submit"
+                                    mat-flat-button color="primary">
+                                    Save Changes
+                                </button>
+                            </div>
+
+                            <div *ngIf="isDisabled">
+                                <button style="text-align: right;" (click)="enableForm()" mat-flat-button
+                                    color="primary" type="button">
+                                    Edit Data
+                                </button>
+                            </div>
+
+
+                        </form>
+
+                    </mat-card>
+                </mat-tab>
+                <mat-tab label="Manage Password">
+                    <mat-card class="mat-elevation-z2">
+                        <app-change-password></app-change-password>
+                    </mat-card>
+                </mat-tab>
+                <mat-tab label="Joined Events">
+                    Content 3
+                </mat-tab>
+            </mat-tab-group>
+</div>

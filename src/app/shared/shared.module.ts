@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ErrPageComponent } from './components/err-page/err-page.component';
 import { CardComponent } from './components/card/card.component';
 import { RouterModule } from '@angular/router';
+import { MatTabsModule } from '@angular/material/tabs';
+import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader';
 
 const modules = [
   CommonModule,
@@ -26,17 +28,14 @@ const modules = [
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-]
+  MatTabsModule
+];
 
-const components = [
-  MainNavComponent,
-  ErrPageComponent, 
-  CardComponent
-]
+const components = [MainNavComponent, ErrPageComponent, CardComponent, SkeletonLoaderComponent];
 
 @NgModule({
   declarations: [...components],
   imports: [...modules],
-  exports: [...modules, ...components]
+  exports: [...modules, ...components],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { User } from './User';
@@ -32,7 +32,7 @@ export class AuthService {
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
-          return null;
+          return of(null);
         }
       })
     );
@@ -67,20 +67,6 @@ export class AuthService {
   /** Login with email */
   signIn(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password);
-        
-    // return this.afAuth
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then((result) => {
-    //     if (!result.user.emailVerified) {
-    //       new Promise((resolve: any, reject: any) => {
-    //         resolve(this.sendVerificationMail())
-    //       })
-
-    //       this.signOut();
-    //     } else {
-    //       this.router.navigate(['']);
-    //     }
-    //   });
   }
 
   /** SignUp with email */
@@ -103,20 +89,13 @@ export class AuthService {
             () => this.signOut(),
             (er) => console.log(er, 'failed to add data')
           );
-          // this.signOut();
-          // this.afs.collection('users').doc(result.user.uid).set({
-          //   firstName: firstName,
-          //   lastName: lastName,
-          //   email:  email,
-          //   mobileNumber:phone
-          // }).then(()=>this.signOut(),er=>console.log(er,'failed to add data'))
         }
       });
   }
 
   signOut() {
     this.afAuth.signOut();
-    this.router.navigate(['login']);
+    this.router.navigate(['user/register']);
   }
 
   /** Password reset email */
@@ -164,5 +143,55 @@ export class AuthService {
       }
     }
     return false;
+  }
+
+  /**
+   * Update Profile
+   */
+  updateProfile(data: any) {
+    return new Promise((resolve, reject) => {
+      this.afAuth.authState.subscribe((user) => {
+        if (user) {
+          this.afs
+            .collection('users')
+            .doc(user.uid)
+            .update({
+              ...data,
+            });
+          resolve('Updated Succesfully');
+        } else {
+          reject('Operation Failed');
+        }
+      });
+    });
+  }
+
+  changePassword(data) {
+    const user = firebase.auth().currentUser;
+    const credentials = firebase.auth.EmailAuthProvider.credential(
+      user.email,
+      data.oldPassword
+    );
+    user
+      .reauthenticateWithCredential(credentials)
+      .then((success) => {
+        user
+          .updatePassword(data.confirmPassword)
+          .then(() => {
+            alert('Password Change Successfully!');
+          })
+          .catch((err) => alert(err));
+      })
+      .catch((err) => {
+        if (err.code === 'auth/wrong-password') {
+          alert('Change Password Failed');
+        }
+      });
+    console.log(credentials);
+  }
+
+  checkAuthProvider() {
+    const user = firebase.auth().currentUser;
+    console.log(user);
   }
 }

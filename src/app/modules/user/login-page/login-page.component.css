@@ -9,8 +9,9 @@
   height: 10px;
   width: 75px;
   background: white;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-bottom: 2em;
+  transform: skewX(47deg);
 }
 
 .left {

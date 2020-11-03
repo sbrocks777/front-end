@@ -12,10 +12,3 @@ form {
 .server-error {
   margin-bottom: 8px;
 }
-
-.col-2 {
-  display: flex;
-  gap: 1em;
-  align-items: center;
-  justify-content: space-between;
-}
