@@ -1,5 +1,64 @@
 .card-list {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scroll {
+  overflow-y: scroll;
+}
+
+.featured-card-img {
+  max-width: 1000px;
+  height: 75vh;
+  border-radius: 5px;
+}
+@media (min-width: 1200px) {
+  .owl-item {
+    width: 300px !important;
+    margin-right: 5px !important;
+  }
+}
+
+@media (min-width: 320px) {
+  .owl-item {
+    width: 135px !important;
+    height: auto !important;
+  }
+}
+@media (min-width: 375px) {
+  .owl-item {
+    width: 160px !important;
+    height: auto !important;
+  }
+}
+@media (min-width: 425px) {
+  .owl-item {
+    width: 185px !important;
+    height: auto !important;
+  }
+}
+@media (min-width: 768px) {
+  .owl-item {
+    width: 230px !important;
+    height: auto !important;
+  }
+}
+@media (min-width: 1024px) {
+  .owl-item {
+    width: 240px !important;
+    height: auto !important;
+  }
+}
+@media (min-width: 1440px) {
+  .owl-item {
+    width: 340px !important;
+    height: auto !important;
+  }
+}
+@media (min-width: 2560px) {
+  .owl-item {
+    width: 100% !important;
+    height: auto !important;
+  }
 }

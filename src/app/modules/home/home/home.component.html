@@ -1,12 +1,43 @@
 <div class="container">
-    <div class="card-list">
-        <ng-container *ngIf="eventList">
+    <!-- <div class="card-list"> -->
+    <!-- <ng-container *ngIf="eventList">
             <ng-container *ngFor="let event of eventList">
                 <app-card *ngIf="event.isActive" [event]="event"></app-card>
             </ng-container>
-        </ng-container>
-        <ng-container *ngIf="!eventList">
-            <h1>Loading...</h1>
-        </ng-container>
+        </ng-container> -->
+
+
+    <!-- </div> -->
+
+    <owl-carousel-o [options]="customOptionsFeatured" *ngIf="!loading">
+        <ng-template carouselSlide *ngFor="let event of featuredEvents">
+            <div [routerLink]="['events/details', event.id]">
+                <img class="featured-card-img" [src]="event.eventBanner" />
+            </div>
+        </ng-template>
+    </owl-carousel-o>
+
+    <div class="container">
+        <div *ngFor="let category of categoriesCarousal">
+            <div class="d-sm-flex align-items-center justify-content-between my-3">
+                <h5 class="mb-0 text-gray-900 category-name" [routerLink]="['events/categories', category.category]">
+                    {{ category.category }}
+                </h5>
+                <h6 class="mb-0">
+                    <a [routerLink]="['events/categories', category.category]">
+                        View all
+                        <i class="ml-2 fas fa-eye fa-sm"></i>
+                    </a>
+                </h6>
+            </div>
+            <owl-carousel-o [options]="customOptions" *ngIf="!loading" class="">
+                <ng-template carouselSlide *ngFor="let event of category.data" [width]="500">
+                    <div class="card-wrapper owl-item">
+                        <app-card [event]="event"></app-card>
+                    </div>
+                </ng-template>
+            </owl-carousel-o>
+        </div>
     </div>
+
 </div>
