@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ErrPageComponent } from './shared/components/err-page/err-page.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
     path: 'events',
     loadChildren: () =>
       import('./modules/events/events.module').then((p) => p.EventsModule),
+  },
+  {
+    path: '**',
+    component: ErrPageComponent
   },
 ];
 
