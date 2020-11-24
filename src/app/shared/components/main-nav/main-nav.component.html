@@ -1,29 +1,39 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      mode="over">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    mode="over">
     <!-- <mat-toolbar>Menu</mat-toolbar> -->
-    <div class="user-view">
-      <button mat-fab color="accent" class="user-name">A</button>
-      <div class="user-email">admin@gmail.com</div>
-  </div>
+    <div class="user-view" *ngIf="(afAuth.authState | async) as user">
+      <button mat-fab color="accent" *ngIf="user" class="user-name">{{ user.email[0] }}</button>
+      <div class="user-email" *ngIf="user">{{ user.email }}</div>
+    </div>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item *ngIf="!(afAuth.authState | async)" routerLink="user/register">Login</a>
+      <a mat-list-item *ngIf="(afAuth.authState | async)" routerLink="user/my-bookings">My Bookings</a>
+      <a mat-list-item *ngIf="(afAuth.authState | async)" routerLink="user/account">Manage Account</a>
+      <a mat-list-item *ngIf="(afAuth.authState | async)" (click)="afAuth.signOut()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class="logo">GHRCEMCS</span>
+      <span class="fill-space"></span>
+      <ng-container *ngIf="!(isHandset$ | async)">
+        <div *ngIf="(afAuth.authState | async) as user">
+          <button mat-mini-fab color="accent" style="font-size: larger; font-weight: 500;" [matMenuTriggerFor]="menu">
+            {{user.email[0]}}
+          </button>
+          <mat-menu #menu="matMenu">
+            <a mat-menu-item routerLink="user/my-bookings">My Bookings</a>
+            <a mat-menu-item routerLink="user/account">Manage Account</a>
+            <button mat-menu-item (click)="afAuth.signOut()">Logout</button>
+          </mat-menu>
+        </div>
+        <a *ngIf="!(afAuth.authState | async)" mat-flat-button routerLink="user/register">Login</a>
+      </ng-container>
     </mat-toolbar>
     <!-- Add Content Here -->
     <ng-content></ng-content>

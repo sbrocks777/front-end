@@ -1,0 +1,15 @@
+<div class="container">
+    <h1 style="margin: 1em; font-weight: 500;">All Categories</h1>
+    <div class="col-3">
+        <div class="card" *ngFor="let category of categories">
+            <img class="card__img" [src]="category.imgURL" alt="...">
+            <div class="card__content">
+                <h1 class="card__header">{{ category.name }}</h1>
+                <p class="card__text">more than {{ category.size }} events</p>
+                <button (click)="redirect(category.name)" mat-flat-button color="primary">View all
+                    <i class="fas fa-long-arrow-alt-right text-white"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

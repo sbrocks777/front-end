@@ -3,18 +3,25 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', 
-    loadChildren: () => import('./modules/layout/layout.module').then(m => m.LayoutModule),
-    pathMatch: 'full'
+    path: '',
+    loadChildren: () =>
+      import('./layout/layout.module').then((m) => m.LayoutModule),
+    pathMatch: 'full',
   },
   {
-    path: 'user', 
-    loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule),
-  }
+    path: 'user',
+    loadChildren: () =>
+      import('./modules/user/user.module').then((m) => m.UserModule),
+  },
+  {
+    path: 'events',
+    loadChildren: () =>
+      import('./modules/events/events.module').then((p) => p.EventsModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

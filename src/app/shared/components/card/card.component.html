@@ -1,10 +1,10 @@
-<div class="card"><img class="card__img"
-        src="https://images.unsplash.com/photo-1485160497022-3e09382fb310?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80"
+<div [routerLink]="['/events/details', event.id]" class="card"><img class="card__img"
+        [src]="event.eventThumbnail"
         alt="Desert">
     <div class="card__content">
         <h1 class="card__header">{{event.eventName | titlecase }}</h1>
         <p class="card__text">{{event.eventStartDate.seconds * 1000 | date:"mediumDate"}} | {{event.eventCity | titlecase}}</p>
-        <strong class="card__text price">{{event.eventSeatsLimit | currency:'INR'}}</strong>
+        <strong class="card__text price">{{event.eventTicketPrice | currency:'INR'}}</strong>
         <!-- <button class="card__btn">Explore <span>&rarr;</span></button> -->
     </div>
 </div>

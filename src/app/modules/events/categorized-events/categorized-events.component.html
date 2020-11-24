@@ -1,0 +1,7 @@
+<div class="container">
+    <h1> Events of {{ name }} category  </h1>
+
+    <div class="col-3">
+        <app-card *ngFor="let event of events" [event]="event"></app-card>
+    </div>
+</div>

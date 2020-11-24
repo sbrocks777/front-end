@@ -28,13 +28,13 @@ export class HomeComponent implements OnInit {
       this.events = events;
       this.categories = this.eventService.categories;
       // Sort events Category wise
-      for (let a = 0; a < this.categories.length; a++) {
+      for (let a = 0; a < this.categories?.length; a++) {
         /* let count = 0 */
-        for (let b = 0; b < this.events.length; b++) {
+        for (let b = 0; b < this.events?.length; b++) {
           if (
             this.events[b].eventCategory == this.categories[a].name &&
             this.events[b].isFeatured != true &&
-            this.tempEvents.length < 5
+            this.tempEvents?.length < 5
           ) {
             this.tempEvents.push(this.events[b]);
             /* count = count + 1 */
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
         }
         //  count = 0
         // If a certain category have more than one events then only add else skip
-        if (this.tempEvents.length > 3) {
+        if (this.tempEvents?.length > 3) {
           this.categoriesCarousal.push({
             category: this.categories[a].name,
             data: [...this.tempEvents],
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
   customOptions: OwlOptions = {
     //center: true,
     loop: true,
-    margin: 10,
+    margin: 20,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
@@ -75,6 +75,9 @@ export class HomeComponent implements OnInit {
       },
       400: {
         items: 1,
+      },
+      600: {
+        items: 2,
       },
       740: {
         items: 3,

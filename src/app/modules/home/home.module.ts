@@ -7,16 +7,17 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent
-  }
-]
+    path: '',
+    component: HomeComponent,
+  },
+];
 
 @NgModule({
   declarations: [HomeComponent],
   imports: [
     SharedModule,
     CarouselModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}

@@ -1,0 +1,79 @@
+<div class="container" *ngIf="loading">
+    <app-skeleton-loader Cheight="80vh" Cwidth="100%"></app-skeleton-loader>
+</div>
+<div class="container" *ngIf="event && !loading">
+    <div class="banner">
+        <img [src]="event.eventBanner" />
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-size: 1.6rem; font-weight: 600; margin: 1em">{{ event.eventName }} -
+            {{event.eventTicketPrice | currency:'INR'}}</h1>
+
+        <a style="margin: 1em;" role="button" mat-raised-button color="primary" *ngIf="!(afAuth.authState | async)"
+            routerLink="/user/register" class="d-sm-inline-block btn btn-primary text-white">
+            Book Now
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+
+        <button style="margin: 1em;" mat-raised-button color="primary" *ngIf="(afAuth.authState | async) && joined"
+            data-toggle="modal" (click)="joinEvent(event.id, event.eventName, event.eventTicketPrice, event.uid)"
+            data-target="#exampleModalCenter" class="d-sm-inline-block btn btn-primary text-white">
+            Book Now &nbsp;&nbsp;
+            <i class="fas fa-external-link-alt"></i>
+        </button>
+
+        <div>
+            <button style="margin: 0em 1em;" mat-raised-button color="warn" role="button"
+                *ngIf="(afAuth.authState | async) && showCancelBtn" (click)="cancelBooking(event.id)"
+                class="d-sm-inline-block btn btn-primary mr-2">
+                Cancel &nbsp;&nbsp;
+                <i class="fas fa-window-close"></i>
+            </button>
+
+            <a style="margin: 0em 1em; background: chartreuse;" mat-flat-button
+                *ngIf="(afAuth.authState | async) && !joined" class="d-sm-inline-block btn" [ngClass]="
+          isPaid ? 'text-white btn-success' : 'text-dark btn-warning'
+        ">
+                {{
+          isPaid ? "Booked &nbsp; &nbsp;" : "Booking Pending &nbsp;&nbsp;"
+        }}
+                <i class="fas" [ngClass]="isPaid ? 'fa-check-circle' : 'fa-clock'"></i>
+            </a>
+        </div>
+    </div>
+
+    <div style="box-shadow: 0px 0px 5px 3px #e0e0e0;">
+        <mat-tab-group>
+            <mat-tab label="Event Details">
+                <div class="container">
+                    <h2 class="tt">Description</h2>
+                    <p>{{ event.eventDescription }}</p>
+
+                    <h2 class="tt">Start Date</h2>
+                    <p>{{ event.eventStartDate.seconds * 1000 | date:'mediumDate' }} at
+                        {{ event.eventStartTime | date: 'shortTime' }}</p>
+
+                    <h2 class="tt">End Date</h2>
+                    <p>{{ event.eventEndDate.seconds * 1000 | date:'mediumDate' }} at
+                        {{ event.eventStartTime | date: 'shortTime' }}</p>
+
+                    <h2 class="tt">City</h2>
+                    <p>{{ event.eventCity }}</p>
+                </div>
+            </mat-tab>
+            <mat-tab label="Organizer Details">
+                <div class="container">
+                    <h2 class="tt">Organizer Name</h2>
+                    <p>{{event.eventOrganizerName}}</p>
+
+                    <h2 class="tt">Organizer Email</h2>
+                    <p>{{event.eventOrganizerEmail}}</p>
+
+                    <h2 class="tt">Organizer Phone Number</h2>
+                    <p>{{event.eventOrganizerPhoneNumber}}</p>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

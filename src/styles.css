@@ -8,10 +8,8 @@
 
 html,
 body {
-  height: 100%;
-}
-body {
   margin: 0;
+  padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -21,14 +19,25 @@ body {
   padding: 1em;
 }
 
-.col-2 {
+.col-2, .col-3 {
   display: grid;
   grid-template-columns: auto auto;
   column-gap: 1em;
+  margin-right: 1.5em;
+}
+
+.col-3 {
+  grid-template-columns: auto auto auto;
 }
 
 @media only screen and (max-width: 600px) {
-  .col-2 {
+  .col-2, .col-3 {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .col-2, .col-3 {
     grid-template-columns: auto;
   }
 }

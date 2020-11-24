@@ -6,9 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./skeleton-loader.component.css'],
 })
 export class SkeletonLoaderComponent implements OnInit {
-  @Input() Cwidth;
-  @Input() Cheight;
+  @Input() Cwidth:any;
+  @Input() Cheight:any;
   @Input() circle: boolean;
+  @Input() Cbackground: any;
 
   constructor() {}
 
@@ -19,6 +20,7 @@ export class SkeletonLoaderComponent implements OnInit {
       'width': this.Cwidth ? this.Cwidth : '',
       'height': this.Cheight ? this.Cheight : '',
       'border-radius': this.circle ? '50%' : '',
+      'background': this.Cbackground ? this.Cbackground : '',
     };
     return myStyles;
   }

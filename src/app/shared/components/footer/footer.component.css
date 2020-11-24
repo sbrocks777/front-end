@@ -1,0 +1,26 @@
+footer {
+    background-color: #1e2231;
+    color: #fff;
+    padding-top: 20px;
+    line-height: 1.7rem;
+}
+
+.info {
+    max-width: 400px;
+}
+
+.h1 {
+    font-size: 1.64rem;
+}
+
+.links ul { 
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer .copyright {
+    overflow: hidden;
+    color: rgba(255,255,255,0.8);
+    background-color: rgb(17 21 35 / 80%)
+}
