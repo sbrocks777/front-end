@@ -27,8 +27,8 @@
             {{user.email[0]}}
           </button>
           <mat-menu #menu="matMenu">
-            <a mat-menu-item routerLink="user/my-bookings">My Bookings</a>
-            <a mat-menu-item routerLink="user/account">Manage Account</a>
+            <a mat-menu-item routerLink="/user/my-bookings">My Bookings</a>
+            <a mat-menu-item routerLink="/user/account">Manage Account</a>
             <button mat-menu-item (click)="afAuth.signOut()">Logout</button>
           </mat-menu>
         </div>

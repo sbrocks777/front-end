@@ -21,11 +21,13 @@ body {
 
 .col-2, .col-3 {
   display: grid;
-  grid-template-columns: auto auto;
   column-gap: 1em;
   margin-right: 1.5em;
 }
 
+.col-2 {
+  grid-template-columns: auto auto;
+}
 .col-3 {
   grid-template-columns: auto auto auto;
 }
